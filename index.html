@@ -1,11 +1,359 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/reset.css" />
+    <link rel="stylesheet" href="./styles/base.css" />
+    <link rel="stylesheet" href="./styles/components.css" />
+    <link rel="stylesheet" href="./styles/pages/index.css" />
     <title>VESTA — магазин одежды</title>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-top">
+        <div class="container header-container">
+          <a href="./index.html"
+            ><img src="./assets/images/icons/brand-logo.svg" alt="logo" />
+          </a>
+          <div class="header-top__actions">
+            <nav class="main-nav" aria-label="Основное меню верхней панели">
+              <ul class="main-nav__list">
+                <li class="main-nav__item main-nav__item--decoration">
+                  <a href="./pages/catalog.html">Каталог</a>
+                </li>
+                <li class="main-nav__item">
+                  <a href="#">
+                    <svg class="main-nav-icon" width="22" height="22">
+                      <use
+                        href="./assets/images/icons/header-sprite.svg#icon-fav"
+                      ></use>
+                    </svg>
+                    Избранное
+                  </a>
+                </li>
+                <li class="main-nav__item main-nav__item--decoration">
+                  <a href="#">
+                    <svg class="main-nav-icon" width="22" height="22">
+                      <use
+                        href="./assets/images/icons/header-sprite.svg#icon-cart"
+                      ></use>
+                    </svg>
+                    Корзина
+                  </a>
+                </li>
+              </ul>
+            </nav>
+            <a
+              href="./pages/login.html"
+              class="button button--theme_light header-top__login"
+              >Войти</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="header-bottom">
+        <div class="container header-container">
+          <nav class="nav-links" aria-label="Категории товаров">
+            <ul class="nav-links__list">
+              <li class="nav-links__item"><a href="#">Новинки</a></li>
+              <li class="nav-links__item"><a href="#">Одежда</a></li>
+              <li class="nav-links__item"><a href="#">Обувь</a></li>
+              <li class="nav-links__item"><a href="#">Аксессуары</a></li>
+              <li class="nav-links__item"><a href="#">Спорт</a></li>
+              <li class="nav-links__item"><a href="#">Красота</a></li>
+              <li class="nav-links__item"><a href="#">Дом</a></li>
+              <li class="nav-links__item nav-links__item--sale">
+                <a href="#">Скидки</a>
+              </li>
+            </ul>
+          </nav>
+          <div class="search-bar">
+            <input
+              type="search"
+              class="search-bar__input"
+              aria-label="Поиск товаров"
+              placeholder="Искать одежду, обувь, аксессуары..."
+            />
+            <button class="search-bar__button">
+              <img src="./assets/images/icons/search-icon.svg" alt="" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- hero-секция на весь экран -->
+      <section class="hero">
+        <div class="hero__slider">
+          <!-- Слайд 1 -->
+          <div class="hero__slide">
+            <div
+              class="hero__bg"
+              style="
+                background-image: url(./assets/images/main_slider/hero-bg1.jpg);
+              "
+            ></div>
+            <div class="container hero__container">
+              <h1 class="hero__title hero__title--left">
+                Стиль для <br />
+                каждого дня
+              </h1>
+            </div>
+          </div>
+
+          <!-- Слайд 2 -->
+          <div class="hero__slide">
+            <div
+              class="hero__bg"
+              style="
+                background-image: url(./assets/images/main_slider/hero-bg2.jpg);
+              "
+            ></div>
+            <div class="container hero__container">
+              <h1 class="hero__title hero__title--center">
+                Комфорт без <br />
+                компромиссов
+              </h1>
+            </div>
+          </div>
+
+          <!-- Слайд 3 -->
+          <div class="hero__slide">
+            <div
+              class="hero__bg"
+              style="
+                background-image: url(./assets/images/main_slider/hero-bg3.jpg);
+              "
+            ></div>
+            <div class="container hero__container">
+              <h1 class="hero__title hero__title--right">
+                Твой <br />
+                идеальный образ
+              </h1>
+            </div>
+          </div>
+        </div>
+
+        <div class="container hero__pagination-container">
+          <div class="hero__pagination">
+            <button
+              class="hero__dot hero__dot--active"
+              aria-label="Слайд 1"
+            ></button>
+            <button class="hero__dot" aria-label="Слайд 2"></button>
+            <button class="hero__dot" aria-label="Слайд 3"></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- секция "о нас" -->
+      <section class="about" aria-labelledby="about-title">
+        <div class="container">
+          <h2 id="about-title" class="section-title">
+            Стиль, комфорт и уверенность — в каждом образе
+          </h2>
+          <p class="about__desc">
+            В нашем интернет-магазине мы предлагаем не просто одежду — мы
+            помогаем вам создавать уникальные образы для жизни. Мы верим, что
+            стиль начинается с мелочей: от идеально сидящего платья до удобной
+            пары кроссовок. В каждом предмете нашего ассортимента вы найдёте
+            отражение своей индивидуальности. Мы ценим ваше время и заботимся о
+            том, чтобы шопинг приносил только удовольствие. Именно поэтому мы
+            создали магазин, где легко найти то, что нужно именно вам, а покупки
+            проходят быстро и комфортно.
+          </p>
+          <ul class="about__features">
+            <li class="about__feature">
+              <img src="./assets/images/icons/delivery-icon.svg" alt="" />
+              <h4 class="about__feature-title">Быстрая доставка</h4>
+            </li>
+            <li class="about__feature">
+              <img src="./assets/images/icons/hanger-icon.svg" alt="" />
+              <h4 class="about__feature-title">Примерка перед покупкой</h4>
+            </li>
+            <li class="about__feature">
+              <img src="./assets/images/icons/card-icon.svg" alt="" />
+              <h4 class="about__feature-title">Удобные способы оплаты</h4>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- категории -->
+      <section class="categories" aria-labelledby="categories-title">
+        <div class="container">
+          <h2 id="categories-title" class="section-title">
+            Выберите интересующий вас раздел
+          </h2>
+          <ul class="categories__list">
+            <li class="categories__list-item">
+              <a href="#">
+                <img src="./assets/images/categories/women.jpg" alt="Женщинам" />
+                <h4>Женщинам</h4>
+              </a>
+            </li>
+            <li class="categories__list-item">
+              <a href="#">
+                <img src="./assets/images/categories/men.jpg" alt="Мужчинам" />
+                <h4>Мужчинам</h4>
+              </a>
+            </li>
+            <li class="categories__list-item">
+              <a href="#">
+                <img src="./assets/images/categories/sale.jpg" alt="Скидки" />
+                <h4>Скидки</h4>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- популярные товары -->
+      <section class="popular" aria-labelledby="popular-title">
+        <div class="container">
+          <h2 id="popular-title" class="section-title">Популярное</h2>
+          <div class="product-list"></div>
+        </div>
+      </section>
+
+      <!-- акции на товары -->
+      <section class="sales" aria-labelledby="sales-title">
+        <div class="container">
+          <h2 id="sales-title" class="section-title">Акции</h2>
+          <div class="product-list"></div>
+        </div>
+      </section>
+
+
+      <!-- быстрая форма -->
+      <section class="quick-form">
+        <div class="container quick-form__container">
+          <div class="quick-form__text">
+            <h3 class="quick-form__title">Получи скидку 10% по подписке</h3>
+            <p class="quick-form__desc">
+              Получи скидку 10% уже при первой покупке. Будь первым, кто узнает
+              о новых коллекциях, предложениях и специальных акциях нашего
+              магазина.
+            </p>
+          </div>
+          <form class="quick-form__form">
+            <input
+              type="email"
+              required
+              name="email"
+              class="form-input quick-form__input"
+              placeholder="example@mail.com"
+            />
+            <button type="submit" class="button button--theme_primary">
+              Подписаться
+            </button>
+            <div class="quick-form__checkbox-container">
+              <input
+                type="checkbox"
+                name="checkbox"
+                id="checkbox-form"
+                required
+                class="quick-form__checkbox"
+              />
+              <label
+                class="quick-form__checkbox-title small-text"
+                for="checkbox-form"
+              >
+                Подписываясь, вы соглашаетесь с нашей политикой
+                конфиденциальности.
+              </label>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="footer-top">
+        <div class="container footer-container-top">
+          <div class="footer-top__info">
+            <div class="footer-top__brand">
+              <img src="./assets/images/icons/brand-logo.svg" alt="logo" />
+              <ul class="footer-socials">
+                <li class="footer-socials__item">
+                  <a href="#" aria-label="telegram">
+                    <svg class="social-icon" width="32" height="32">
+                      <use
+                        href="./assets/images/icons/socials-sprite.svg#icon-telegram"
+                      ></use>
+                    </svg>
+                  </a>
+                </li>
+                <li class="footer-socials__item">
+                  <a href="#" aria-label="tiktok">
+                    <svg class="social-icon" width="32" height="32">
+                      <use
+                        href="./assets/images/icons/socials-sprite.svg#icon-tiktok"
+                      ></use>
+                    </svg>
+                  </a>
+                </li>
+                <li class="footer-socials__item">
+                  <a href="#" aria-label="vk">
+                    <svg class="social-icon" width="32" height="32">
+                      <use
+                        href="./assets/images/icons/socials-sprite.svg#icon-vk"
+                      ></use>
+                    </svg>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="footer-top__contacts">
+              <a href="#">8 (800) 300-00-00</a>
+              <a href="#">vesta@ya.ru</a>
+            </div>
+          </div>
+          <div class="footer-top__nav">
+            <ul class="footer-nav">
+              <li class="footer-nav__item">
+                <a href="#">Мои заказы</a>
+              </li>
+              <li class="footer-nav__item">
+                <a href="#">Доставка</a>
+              </li>
+              <li class="footer-nav__item">
+                <a href="#">Правила возврата</a>
+              </li>
+              <li class="footer-nav__item">
+                <a href="#">О компании</a>
+              </li>
+              <li class="footer-nav__item">
+                <a href="#">Оферта</a>
+              </li>
+              <li class="footer-nav__item">
+                <a href="#">Наши контакты</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="container footer-container-bottom">
+          <div class="footer-bottom__legal">
+            <a href="#" class="footer-bottom__links small-text">
+              Пользовательское соглашение
+            </a>
+            <a href="#" class="footer-bottom__links small-text">
+              Политика по работе с персональными данными</a
+            >
+            <a href="#" class="footer-bottom__links small-text">
+              Служба поддержки
+            </a>
+          </div>
+          <div class="footer-bottom__copyright small-text">
+            © 2026 VESTA все права защищены
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./scripts/index.js"></script>
+  </body>
 </html>
