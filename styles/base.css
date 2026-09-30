@@ -1,0 +1,100 @@
+@font-face {
+  font-family: "Montserrat";
+  src:
+    url("../assets/fonts/Montserrat-VariableFont_wght.woff2")
+      format("woff2-variations"),
+    url("../assets/fonts/Montserrat-VariableFont_wght.woff") format("woff");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roboto";
+  src:
+    url("../assets/fonts/Roboto-VariableFont_wdth_wght.woff2")
+      format("woff2-variations"),
+    url("../assets/fonts/Roboto-VariableFont_wdth_wght.woff") format("woff");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+:root {
+  font-size: 1rem;
+
+  --color-text: #0a0a0a;
+  --color-accent: #dc3e33;
+  --color-secondary: #0a0a0a;
+  --color-primary: #fffaf4;
+}
+
+.container {
+  max-width: 1200px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+body {
+  background: var(--color-primary);
+  font-size: 1rem;
+  color: var(--color-text);
+  font-family: "Roboto";
+}
+
+h1 {
+  font-family: "Montserrat";
+  font-size: 3rem;
+  line-height: 1.5;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+h2 {
+  font-family: "Montserrat";
+  font-size: 2rem;
+  line-height: 1.5;
+  font-weight: 700;
+  text-align: center;
+}
+h3 {
+  font-family: "Montserrat";
+  font-size: 1.5rem;
+  line-height: 1.5;
+  font-weight: 700;
+}
+h4 {
+  font-family: "Roboto";
+  font-size: 1.125rem;
+  line-height: 1.15;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+p,
+a,
+input,
+button {
+  font-family: "Roboto";
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+button {
+  background-color: inherit;
+  cursor: pointer;
+}
+
+input {
+  background-color: inherit;
+}
+
+.small-text,
+.form-label {
+  font-family: "Roboto";
+  font-size: 0.75rem;
+  line-height: 1.167;
+  font-weight: 400;
+  text-transform: uppercase;
+}
