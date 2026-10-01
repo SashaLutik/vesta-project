@@ -87,7 +87,43 @@
 
     <main class="main">
       <div class="container">
-        
+        <!-- фильтры -->
+        <div class="filters">
+          <div class="filters__header">
+            <h4 class="filters__title">Фильтры</h4>
+            <button class="filters__btn-clear small-text">Сбросить все</button>
+          </div>
+          <div class="filters-panel"><!-- фильтры карточек --></div>
+
+          <!-- Шаблон фильтра -->
+          <template id="filter-category-template">
+            <div class="filter-category">
+              <button class="filter-category__header" type="button">
+                <span class="filter-category__name"></span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path
+                    d="M4 6L8 10L12 6"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+              <div class="filter-options"></div>
+            </div>
+          </template>
+          <!-- Шаблон опции фильтра -->
+          <template id="filter-option-template">
+            <label class="filter-option">
+              <input type="" name="" value="" />
+              <span></span>
+            </label>
+          </template>
+        </div>
+
+        <!-- сообщение "Товары не найдены" -->
+        <div class="catalog-empty" hidden>Упс! Товары не найдены</div>
+
         <!-- сетка карточек -->
         <div class="catalog-grid">
           <!-- карточки товаров -->
