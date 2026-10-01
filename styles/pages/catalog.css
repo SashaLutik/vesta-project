@@ -170,7 +170,7 @@
   .filter-options {
     bottom: 0;
     position: fixed;
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: var(--space-sm);
     top: auto;
@@ -179,10 +179,10 @@
     width: auto;
     padding-bottom: 3rem;
     transform: translateY(100%);
-    transition: transform 0.4s;
   }
   .filter-options.is-open {
     box-shadow: 0px -8px 8px #0a0a0a26;
+    display: flex;
     transform: translateY(0);
   }
   .filter-options__top {
