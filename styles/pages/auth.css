@@ -1,13 +1,18 @@
+html,
 body {
-  background: var(--color-secondary);
-  background-image: url(../../assets/images/auth-bg.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  height: 100%;
+}
+
+body {
+  background: var(--color-secondary) url("../../assets/images/auth-bg.jpg")
+    center / cover no-repeat fixed;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
 .main {
-  min-height: 90vh;
-  padding: var(--space-xl) 0;
+  flex: 1 0 auto;
+  padding: 4.75rem 0 var(--space-xl) 0;
 }
 
 /* форма */
@@ -24,43 +29,41 @@ body {
   margin-bottom: var(--space-xl);
   text-align: center;
 }
-
 .form-auth__header {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
   margin-bottom: var(--space-sm);
 }
-
 .auth-password__container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: var(--space-xl);
-  gap: var(--space-lg);
+
+  gap: var(--space-sm);
 }
 .auth-password__container:focus-within {
   outline: auto;
 }
+.form-input--has_margin {
+  margin-bottom: var(--space-xl);
+}
 .auth-password__input {
   flex-grow: 1;
-  min-width: 0;    
+  min-width: 0;
   border: none;
   outline: none;
 }
-
 .auth-password__icon {
   cursor: pointer;
   flex-shrink: 0;
 }
-
 .form-error {
   color: var(--color-accent);
   font-size: 0.75rem;
   line-height: 1.167;
   font-weight: 400;
 }
-
 .form-input--invalid {
   border-color: var(--color-accent);
 }
@@ -69,8 +72,21 @@ body {
   align-items: center;
   justify-content: center;
   margin-top: var(--space-xl);
+  text-align: center;
 }
 .form-auth__footer span {
   color: var(--color-accent);
   text-decoration: underline;
+}
+
+/* адаптив под устройства */
+@media (max-width: 670px) {
+  .main {
+    padding-bottom: var(--space-md);
+  }
+}
+@media (max-width: 450px) {
+  .form-auth {
+    padding: var(--space-xl) var(--space-md);
+  }
 }

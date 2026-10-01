@@ -16,7 +16,17 @@
           <a href="./index.html"
             ><img src="./assets/images/icons/brand-logo.svg" alt="logo" />
           </a>
+          <div class="header-burger header-burger--top">
+            <span></span><span></span><span></span>
+          </div>
           <div class="header-top__actions">
+            <button
+              class="header-top__close"
+              type="button"
+              aria-label="Закрыть меню"
+            >
+              ✕
+            </button>
             <nav class="main-nav" aria-label="Основное меню верхней панели">
               <ul class="main-nav__list">
                 <li class="main-nav__item main-nav__item--decoration">
@@ -29,7 +39,7 @@
                         href="./assets/images/icons/header-sprite.svg#icon-fav"
                       ></use>
                     </svg>
-                    Избранное
+                    <span class="main-nav__label">Избранное</span>
                   </a>
                 </li>
                 <li class="main-nav__item main-nav__item--decoration">
@@ -39,7 +49,7 @@
                         href="./assets/images/icons/header-sprite.svg#icon-cart"
                       ></use>
                     </svg>
-                    Корзина
+                    <span class="main-nav__label">Корзина</span>
                   </a>
                 </li>
               </ul>
@@ -55,6 +65,9 @@
       <div class="header-bottom">
         <div class="container header-container">
           <nav class="nav-links" aria-label="Категории товаров">
+            <div class="header-burger header-burger--bottom">
+              <span></span><span></span><span></span>
+            </div>
             <ul class="nav-links__list">
               <li class="nav-links__item"><a href="#">Новинки</a></li>
               <li class="nav-links__item"><a href="#">Одежда</a></li>
@@ -83,7 +96,7 @@
       </div>
     </header>
 
-    <main>
+    <main class="main">
       <!-- hero-секция на весь экран -->
       <section class="hero">
         <div class="hero__slider">
@@ -272,16 +285,21 @@
             </p>
           </div>
           <form class="quick-form__form">
-            <input
-              type="email"
-              required
-              name="email"
-              class="form-input quick-form__input"
-              placeholder="example@mail.com"
-            />
-            <button type="submit" class="button button--theme_primary">
-              Подписаться
-            </button>
+            <div class="quick-form__email-form">
+              <input
+                type="email"
+                required
+                name="email"
+                class="form-input quick-form__input"
+                placeholder="example@mail.com"
+              />
+              <button
+                type="submit"
+                class="button button--theme_primary quick-form__button"
+              >
+                Подписаться
+              </button>
+            </div>
             <div class="quick-form__checkbox-container">
               <input
                 type="checkbox"
@@ -302,6 +320,7 @@
         </div>
       </section>
     </main>
+
     <footer class="footer">
       <div class="footer-top">
         <div class="container footer-container-top">
@@ -387,6 +406,7 @@
       </div>
     </footer>
 
+    <script src="./scripts/common.js"></script>
     <script src="./scripts/index.js"></script>
   </body>
 </html>

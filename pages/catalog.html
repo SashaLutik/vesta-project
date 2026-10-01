@@ -16,7 +16,17 @@
           <a href="../index.html"
             ><img src="../assets/images/icons/brand-logo.svg" alt="logo" />
           </a>
+          <div class="header-burger header-burger--top">
+            <span></span><span></span><span></span>
+          </div>
           <div class="header-top__actions">
+            <button
+              class="header-top__close"
+              type="button"
+              aria-label="Закрыть меню"
+            >
+              ✕
+            </button>
             <nav class="main-nav" aria-label="Основное меню верхней панели">
               <ul class="main-nav__list">
                 <li
@@ -31,7 +41,7 @@
                         href="../assets/images/icons/header-sprite.svg#icon-fav"
                       ></use>
                     </svg>
-                    Избранное
+                    <span class="main-nav__label">Избранное</span>
                   </a>
                 </li>
                 <li class="main-nav__item main-nav__item--decoration">
@@ -41,7 +51,7 @@
                         href="../assets/images/icons/header-sprite.svg#icon-cart"
                       ></use>
                     </svg>
-                    Корзина
+                    <span class="main-nav__label">Корзина</span>
                   </a>
                 </li>
               </ul>
@@ -57,6 +67,9 @@
       <div class="header-bottom">
         <div class="container header-container">
           <nav class="nav-links" aria-label="Категории товаров">
+            <div class="header-burger header-burger--bottom">
+              <span></span><span></span><span></span>
+            </div>
             <ul class="nav-links__list">
               <li class="nav-links__item"><a href="#">Новинки</a></li>
               <li class="nav-links__item"><a href="#">Одежда</a></li>
@@ -91,10 +104,19 @@
         <div class="filters">
           <div class="filters__header">
             <h4 class="filters__title">Фильтры</h4>
+            <button
+              class="filters__toggle button button--theme_light"
+              type="button"
+              aria-expanded="false"
+              aria-controls="filters-panel"
+            >
+              Фильтры
+            </button>
             <button class="filters__btn-clear small-text">Сбросить все</button>
           </div>
-          <div class="filters-panel"><!-- фильтры карточек --></div>
 
+          <div class="filters-panel"><!-- фильтры карточек --></div>
+          <div class="filters-overlay" hidden></div>
           <!-- Шаблон фильтра -->
           <template id="filter-category-template">
             <div class="filter-category">
@@ -109,7 +131,18 @@
                   />
                 </svg>
               </button>
-              <div class="filter-options"></div>
+              <div class="filter-options">
+                <div class="filter-options__top">
+                  <button
+                    class="filter-options__close"
+                    type="button"
+                    aria-label="Закрыть"
+                  >
+                    ✕
+                  </button>
+                </div>
+                <!-- .filter-option из второго шаблона -->
+              </div>
             </div>
           </template>
           <!-- Шаблон опции фильтра -->
@@ -128,7 +161,6 @@
         <div class="catalog-grid">
           <!-- карточки товаров -->
         </div>
-
         <!-- шаблон карточки товара -->
         <template id="product-card-template">
           <article class="product-card">
@@ -246,7 +278,9 @@
         </div>
       </div>
     </footer>
+
     <script src="../scripts/products.js"></script>
     <script src="../scripts/catalog.js"></script>
+    <script src="../scripts/common.js"></script>
   </body>
 </html>

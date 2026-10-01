@@ -34,7 +34,7 @@
             class="form-input"
             name="name"
             id="auth-name"
-            placeholder="Введите ваши Фамилию Имя Отчество"
+            placeholder="Введите ваши ФИО"
           />
 
           <div class="form-auth__header">
@@ -74,7 +74,9 @@
             >
             <span class="form-error" data-error-for="password-repeat"></span>
           </div>
-          <div class="auth-password__container form-input">
+          <div
+            class="auth-password__container form-input form-input--has_margin"
+          >
             <input
               type="password"
               class="auth-password__input"
@@ -99,6 +101,7 @@
         </form>
       </div>
     </main>
+
     <script src="../scripts/auth.js"></script>
   </body>
 </html>

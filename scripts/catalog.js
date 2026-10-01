@@ -8,6 +8,11 @@ const filterConfig = [
 
 let filtersData = {};
 
+/* проверка режима */
+function isMobile() {
+  return window.matchMedia("(max-width: 730px)").matches;
+}
+
 /* панель фильтров */
 function buildFilterPanel() {
   const panel = document.querySelector(".filters-panel");
@@ -44,19 +49,31 @@ function buildFilterPanel() {
     /* сворачивание/разворачивание */
     const header = clone.querySelector(".filter-category__header");
     header.addEventListener("click", () => {
-      /* header.parentElement.classList.toggle("is-open"); */
       const category = header.parentElement;
-      const wasOpen = category.classList.contains("is-open");
+
+      if (!isMobile()) {
+        const wasOpen = category.classList.contains("is-open");
+        panel
+          .querySelectorAll(".filter-category.is-open")
+          .forEach((el) => el.classList.remove("is-open"));
+        if (!wasOpen) category.classList.add("is-open");
+        return;
+      }
 
       panel
-        .querySelectorAll(".filter-category.is-open")
+        .querySelectorAll(".filter-options.is-open")
         .forEach((el) => el.classList.remove("is-open"));
-
-      if (!wasOpen) category.classList.add("is-open");
+      optionsBox.classList.add("is-open");
     });
 
     panel.appendChild(clone);
   });
+
+  const done = document.createElement("button");
+  done.type = "button";
+  done.className = "filters-panel__done button button--theme_dark";
+  done.textContent = "Готово";
+  panel.appendChild(done);
 }
 
 function getFilterState() {
@@ -189,13 +206,81 @@ function bindFilterEvents() {
     });
   }
 
+  panel.addEventListener("click", (e) => {
+    if (e.target.closest(".filters-panel__done")) {
+      closeFiltersPanel();
+      return;
+    }
+    if (e.target.closest(".filter-options__close")) {
+      panel
+        .querySelectorAll(".filter-options.is-open")
+        .forEach((el) => el.classList.remove("is-open"));
+    }
+  });
+
   document.addEventListener("click", (e) => {
+    if (isMobile()) return;
     if (!e.target.closest(".filter-category")) {
       panel
         .querySelectorAll(".filter-category.is-open")
         .forEach((el) => el.classList.remove("is-open"));
     }
   });
+}
+
+function openFiltersPanel() {
+  const panel = document.querySelector(".filters-panel");
+  const toggle = document.querySelector(".filters__toggle");
+  const overlay = document.querySelector(".filters-overlay");
+  if (!panel || !toggle) return;
+
+  panel.classList.add("is-open");
+  toggle.setAttribute("aria-expanded", "true");
+  document.body.style.overflow = "hidden";
+
+  if (overlay) {
+    overlay.hidden = false;
+    requestAnimationFrame(() => overlay.classList.add("is-open"));
+  }
+}
+
+function closeFiltersPanel() {
+  const panel = document.querySelector(".filters-panel");
+  const toggle = document.querySelector(".filters__toggle");
+  const overlay = document.querySelector(".filters-overlay");
+  if (!panel || !toggle) return;
+
+  panel
+    .querySelectorAll(".filter-options.is-open")
+    .forEach((el) => el.classList.remove("is-open"));
+
+  panel.classList.remove("is-open");
+  toggle.setAttribute("aria-expanded", "false");
+  document.body.style.overflow = "";
+
+  if (overlay) {
+    overlay.classList.remove("is-open");
+    setTimeout(() => {
+      overlay.hidden = true;
+    }, 300);
+  }
+}
+
+function initFiltersDrawer() {
+  const toggle = document.querySelector(".filters__toggle");
+  const panel = document.querySelector(".filters-panel");
+  const overlay = document.querySelector(".filters-overlay");
+  if (!toggle || !panel) return;
+
+  toggle.addEventListener("click", () => {
+    panel.classList.contains("is-open")
+      ? closeFiltersPanel()
+      : openFiltersPanel();
+  });
+
+  if (overlay) {
+    overlay.addEventListener("click", closeFiltersPanel);
+  }
 }
 
 async function loadFiltersJson(url = "../data/cards.json") {
@@ -211,6 +296,7 @@ async function initCatalogFilters() {
 
     buildFilterPanel();
     bindFilterEvents();
+    initFiltersDrawer();
     updateFilterOptionStyles();
     applyFilters();
   } catch (error) {
