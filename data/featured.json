@@ -1,0 +1,86 @@
+{
+  "popular": [
+    {
+      "id": 1,
+      "image": "./assets/images/card_images/card-image_1.jpg",
+      "brand": "Abda",
+      "name": "Пальто из мериносовой шерсти",
+      "price": 30990,
+      "oldPrice": null,
+      "discount": null,
+      "isSale": false
+    },
+    {
+      "id": 2,
+      "image": "./assets/images/card_images/card-image_5.jpg",
+      "brand": "frht",
+      "name": "Бомбер",
+      "price": 19800,
+      "oldPrice": null,
+      "discount": null,
+      "isSale": false
+    },
+    {
+      "id": 3,
+      "image": "./assets/images/card_images/card-image_6.jpg",
+      "brand": "Abricot",
+      "name": "Лоферы на каблуке",
+      "price": 6453,
+      "oldPrice": null,
+      "discount": null,
+      "isSale": false
+    },
+    {
+      "id": 4,
+      "image": "./assets/images/card_images/card-image_10.jpg",
+      "brand": "frht",
+      "name": "Рубашка",
+      "price": 13732,
+      "oldPrice": null,
+      "discount": null,
+      "isSale": false
+    }
+  ],
+  "sale": [
+    {
+      "id": 5,
+      "image": "./assets/images/card_images/card-image_4.jpg",
+      "brand": "Lime",
+      "name": "Платье",
+      "price": 2999,
+      "oldPrice": 9999,
+      "discount": 70,
+      "isSale": true
+    },
+    {
+      "id": 6,
+      "image": "./assets/images/card_images/card-image_12.jpg",
+      "brand": "Lime",
+      "name": "Свитер",
+      "price": 2990,
+      "oldPrice": 8990,
+      "discount": 66,
+      "isSale": true
+    },
+    {
+      "id": 7,
+      "image": "./assets/images/card_images/card-image_13.jpg",
+      "brand": "Abricot",
+      "name": "Кеды летние",
+      "price": 2446,
+      "oldPrice": 6990,
+      "discount": 65,
+      "isSale": true
+    },
+    {
+      "id": 8,
+      "image": "./assets/images/card_images/card-image_16.jpg",
+      "brand": "Emka",
+      "name": "Короткий пуховик на молнии",
+      "price": 37790,
+      "oldPrice": 41990,
+      "discount": 10,
+      "isSale": true
+    }
+  ]
+}

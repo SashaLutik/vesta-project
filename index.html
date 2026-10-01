@@ -190,7 +190,10 @@
           <ul class="categories__list">
             <li class="categories__list-item">
               <a href="#">
-                <img src="./assets/images/categories/women.jpg" alt="Женщинам" />
+                <img
+                  src="./assets/images/categories/women.jpg"
+                  alt="Женщинам"
+                />
                 <h4>Женщинам</h4>
               </a>
             </li>
@@ -214,7 +217,7 @@
       <section class="popular" aria-labelledby="popular-title">
         <div class="container">
           <h2 id="popular-title" class="section-title">Популярное</h2>
-          <div class="product-list"></div>
+          <div class="product-list" data-source="popular"></div>
         </div>
       </section>
 
@@ -222,10 +225,40 @@
       <section class="sales" aria-labelledby="sales-title">
         <div class="container">
           <h2 id="sales-title" class="section-title">Акции</h2>
-          <div class="product-list"></div>
+          <div class="product-list" data-source="sale"></div>
         </div>
       </section>
 
+      <!-- шаблон карточки товара -->
+      <template id="product-card-template">
+        <article class="product-card">
+          <button
+            class="product-card__button-fav"
+            aria-label="Добавить в избранное"
+          >
+            <img src="./assets/images/icons/fav-icon.svg" />
+          </button>
+          <a href="#">
+            <div class="product-card__image-container">
+              <span class="product-card__discount-badge"></span>
+              <img
+                src=""
+                alt="товар"
+                class="product-card__image"
+                loading="lazy"
+              />
+            </div>
+            <div class="product-card__top">
+              <h4 class="product-card__price"></h4>
+              <h4 class="product-card__old-price"></h4>
+            </div>
+            <div class="product-card__bottom">
+              <p class="product-card__brand small-text"></p>
+              <p class="product-card__name"></p>
+            </div>
+          </a>
+        </article>
+      </template>
 
       <!-- быстрая форма -->
       <section class="quick-form">
