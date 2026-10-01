@@ -1,11 +1,216 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/reset.css" />
+    <link rel="stylesheet" href="../styles/base.css" />
+    <link rel="stylesheet" href="../styles/components.css" />
+    <link rel="stylesheet" href="../styles/pages/catalog.css" />
     <title>VESTA — Каталог</title>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-top">
+        <div class="container header-container">
+          <a href="../index.html"
+            ><img src="../assets/images/icons/brand-logo.svg" alt="logo" />
+          </a>
+          <div class="header-top__actions">
+            <nav class="main-nav" aria-label="Основное меню верхней панели">
+              <ul class="main-nav__list">
+                <li
+                  class="main-nav__item main-nav__item--decoration main-nav__item--active"
+                >
+                  <a href="catalog.html">Каталог</a>
+                </li>
+                <li class="main-nav__item">
+                  <a href="#">
+                    <svg class="main-nav-icon" width="22" height="22">
+                      <use
+                        href="../assets/images/icons/header-sprite.svg#icon-fav"
+                      ></use>
+                    </svg>
+                    Избранное
+                  </a>
+                </li>
+                <li class="main-nav__item main-nav__item--decoration">
+                  <a href="#">
+                    <svg class="main-nav-icon" width="22" height="22">
+                      <use
+                        href="../assets/images/icons/header-sprite.svg#icon-cart"
+                      ></use>
+                    </svg>
+                    Корзина
+                  </a>
+                </li>
+              </ul>
+            </nav>
+            <a
+              href="./login.html"
+              class="button button--theme_light header-top__login"
+              >Войти</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="header-bottom">
+        <div class="container header-container">
+          <nav class="nav-links" aria-label="Категории товаров">
+            <ul class="nav-links__list">
+              <li class="nav-links__item"><a href="#">Новинки</a></li>
+              <li class="nav-links__item"><a href="#">Одежда</a></li>
+              <li class="nav-links__item"><a href="#">Обувь</a></li>
+              <li class="nav-links__item"><a href="#">Аксессуары</a></li>
+              <li class="nav-links__item"><a href="#">Спорт</a></li>
+              <li class="nav-links__item"><a href="#">Красота</a></li>
+              <li class="nav-links__item"><a href="#">Дом</a></li>
+              <li class="nav-links__item nav-links__item--sale">
+                <a href="#">Скидки</a>
+              </li>
+            </ul>
+          </nav>
+          <div class="search-bar">
+            <input
+              type="search"
+              class="search-bar__input"
+              aria-label="Поиск товаров"
+              placeholder="Искать одежду, обувь, аксессуары..."
+            />
+            <button class="search-bar__button">
+              <img src="../assets/images/icons/search-icon.svg" alt="" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="container">
+        
+        <!-- сетка карточек -->
+        <div class="catalog-grid">
+          <!-- карточки товаров -->
+        </div>
+
+        <!-- шаблон карточки товара -->
+        <template id="product-card-template">
+          <article class="product-card">
+            <button
+              class="product-card__button-fav"
+              aria-label="Добавить в избранное"
+            >
+              <img src="../assets/images/icons/fav-icon.svg" />
+            </button>
+            <a href="#">
+              <div class="product-card__image-container">
+                <span class="product-card__discount-badge"></span>
+                <img
+                  src=""
+                  alt="товар"
+                  class="product-card__image"
+                  loading="lazy"
+                />
+              </div>
+              <div class="product-card__top">
+                <h4 class="product-card__price"></h4>
+                <h4 class="product-card__old-price"></h4>
+              </div>
+              <div class="product-card__bottom">
+                <p class="product-card__brand small-text"></p>
+                <p class="product-card__name"></p>
+              </div>
+            </a>
+          </article>
+        </template>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-top">
+        <div class="container footer-container-top">
+          <div class="footer-top__info">
+            <div class="footer-top__brand">
+              <img src="../assets/images/icons/brand-logo.svg" alt="logo" />
+              <ul class="footer-socials">
+                <li class="footer-socials__item">
+                  <a href="#" aria-label="telegram">
+                    <svg class="social-icon" width="32" height="32">
+                      <use
+                        href="../assets/images/icons/socials-sprite.svg#icon-telegram"
+                      ></use>
+                    </svg>
+                  </a>
+                </li>
+                <li class="footer-socials__item">
+                  <a href="#" aria-label="tiktok">
+                    <svg class="social-icon" width="32" height="32">
+                      <use
+                        href="../assets/images/icons/socials-sprite.svg#icon-tiktok"
+                      ></use>
+                    </svg>
+                  </a>
+                </li>
+                <li class="footer-socials__item">
+                  <a href="#" aria-label="vk">
+                    <svg class="social-icon" width="32" height="32">
+                      <use
+                        href="../assets/images/icons/socials-sprite.svg#icon-vk"
+                      ></use>
+                    </svg>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="footer-top__contacts">
+              <a href="#">8 (800) 300-00-00</a>
+              <a href="#">vesta@ya.ru</a>
+            </div>
+          </div>
+          <div class="footer-top__nav">
+            <ul class="footer-nav">
+              <li class="footer-nav__item">
+                <a href="#">Мои заказы</a>
+              </li>
+              <li class="footer-nav__item">
+                <a href="#">Доставка</a>
+              </li>
+              <li class="footer-nav__item">
+                <a href="#">Правила возврата</a>
+              </li>
+              <li class="footer-nav__item">
+                <a href="#">О компании</a>
+              </li>
+              <li class="footer-nav__item">
+                <a href="#">Оферта</a>
+              </li>
+              <li class="footer-nav__item">
+                <a href="#">Наши контакты</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="container footer-container-bottom">
+          <div class="footer-bottom__legal">
+            <a href="#" class="footer-bottom__links small-text">
+              Пользовательское соглашение
+            </a>
+            <a href="#" class="footer-bottom__links small-text">
+              Политика по работе с персональными данными</a
+            >
+            <a href="#" class="footer-bottom__links small-text">
+              Служба поддержки
+            </a>
+          </div>
+          <div class="footer-bottom__copyright small-text">
+            © 2026 VESTA все права защищены
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="../scripts/products.js"></script>
+    <script src="../scripts/catalog.js"></script>
+  </body>
 </html>
