@@ -1,11 +1,104 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/reset.css" />
+    <link rel="stylesheet" href="../styles/base.css" />
+    <link rel="stylesheet" href="../styles/components.css" />
+    <link rel="stylesheet" href="../styles/pages/auth.css" />
     <title>VESTA — Регистрация</title>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-top header-top--auth">
+        <div class="container header-container">
+          <a href="../index.html"
+            ><img src="../assets/images/icons/brand-logo.svg" alt="logo" />
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="container">
+        <form class="form-auth" action="" aria-labelledby="auth-reg__title">
+          <h3 class="form-auth__title" id="auth-reg__title">Регистрация</h3>
+
+          <div class="form-auth__header">
+            <label for="auth-name" class="form-label">ФИО</label>
+            <span class="form-error" data-error-for="name"></span>
+          </div>
+          <input
+            type="text"
+            class="form-input"
+            name="name"
+            id="auth-name"
+            placeholder="Введите ваши Фамилию Имя Отчество"
+          />
+
+          <div class="form-auth__header">
+            <label for="auth-email" class="form-label">Email</label>
+            <span class="form-error" data-error-for="email"></span>
+          </div>
+          <input
+            type="email"
+            class="form-input"
+            name="email"
+            id="auth-email"
+            placeholder="example@mail.com"
+          />
+
+          <div class="form-auth__header">
+            <label for="auth-password" class="form-label">Пароль</label>
+            <span class="form-error" data-error-for="password"></span>
+          </div>
+          <div class="auth-password__container form-input">
+            <input
+              type="password"
+              class="auth-password__input"
+              name="password"
+              id="auth-password"
+              placeholder="Придумайте пароль"
+            />
+            <img
+              src="../assets/images/icons/eye_hidden-icon.svg"
+              alt="hidden eye"
+              class="auth-password__icon"
+            />
+          </div>
+
+          <div class="form-auth__header">
+            <label for="auth-password-repeat" class="form-label"
+              >Повтор пароля</label
+            >
+            <span class="form-error" data-error-for="password-repeat"></span>
+          </div>
+          <div class="auth-password__container form-input">
+            <input
+              type="password"
+              class="auth-password__input"
+              name="password-repeat"
+              id="auth-password-repeat"
+              placeholder="Повторите ваш пароль"
+            />
+            <img
+              src="../assets/images/icons/eye_hidden-icon.svg"
+              alt="hidden eye"
+              class="auth-password__icon"
+            />
+          </div>
+
+          <button type="submit" class="button button--theme_dark">
+            Зарегистрироваться
+          </button>
+
+          <div class="form-auth__footer">
+            <a href="login.html">Уже есть аккаунт? <span>Войти</span></a>
+          </div>
+        </form>
+      </div>
+    </main>
+    <script src="../scripts/auth.js"></script>
+  </body>
 </html>

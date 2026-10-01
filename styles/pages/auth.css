@@ -1,0 +1,76 @@
+body {
+  background: var(--color-secondary);
+  background-image: url(../../assets/images/auth-bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.main {
+  min-height: 90vh;
+  padding: var(--space-xl) 0;
+}
+
+/* форма */
+.form-auth {
+  display: flex;
+  flex-direction: column;
+  max-width: 26.25rem;
+  padding: var(--space-xl) var(--space-2xl);
+  background: var(--color-primary);
+  border-radius: 8px;
+  margin: var(--space-2xl) auto var(--space-lg);
+}
+.form-auth__title {
+  margin-bottom: var(--space-xl);
+  text-align: center;
+}
+
+.form-auth__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.auth-password__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-xl);
+  gap: var(--space-lg);
+}
+.auth-password__container:focus-within {
+  outline: auto;
+}
+.auth-password__input {
+  flex-grow: 1;
+  min-width: 0;    
+  border: none;
+  outline: none;
+}
+
+.auth-password__icon {
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.form-error {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  line-height: 1.167;
+  font-weight: 400;
+}
+
+.form-input--invalid {
+  border-color: var(--color-accent);
+}
+.form-auth__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--space-xl);
+}
+.form-auth__footer span {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
