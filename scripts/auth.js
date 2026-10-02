@@ -44,6 +44,15 @@ function validateName(input) {
   return true;
 }
 
+function validateLogin(input) {
+  if (!input.value.trim()) {
+    showError(input, "*Укажите Логин");
+    return false;
+  }
+  clearError(input);
+  return true;
+}
+
 function validateEmail(input) {
   const value = input.value.trim();
   if (!value) {
@@ -107,6 +116,7 @@ function initRegistrationForm() {
   if (!form) return;
 
   const nameInput = form.querySelector('input[name="name"]');
+  const loginInput = form.querySelector('input[name="login"]');
   const emailInput = form.querySelector('input[name="email"]');
   const passwordInput = form.querySelector('input[name="password"]');
   const repeatInput = form.querySelector('input[name="password-repeat"]');
@@ -114,6 +124,7 @@ function initRegistrationForm() {
   if (!repeatInput) return;
 
   nameInput.addEventListener("input", () => clearError(nameInput));
+  loginInput.addEventListener("input", () => clearError(loginInput));
   emailInput.addEventListener("input", () => clearError(emailInput));
   passwordInput.addEventListener("input", () => {
     clearError(passwordInput);
@@ -126,11 +137,13 @@ function initRegistrationForm() {
     clearAllErrors(form);
 
     const okName = validateName(nameInput);
+    const okLogin = validateLogin(loginInput);
     const okEmail = validateEmail(emailInput);
     const okPassword = validatePassword(passwordInput);
     const okRepeat = validatePasswordRepeat(passwordInput, repeatInput);
 
     if (!okName) return nameInput.focus();
+    if (!okLogin) return loginInput.focus();
     if (!okEmail) return emailInput.focus();
     if (!okPassword) return passwordInput.focus();
     if (!okRepeat) return repeatInput.focus();
@@ -146,11 +159,11 @@ function initLoginForm() {
 
   if (form.querySelector('input[name="password-repeat"]')) return;
 
-  const nameInput = form.querySelector('input[name="name"]');
+  const loginInput = form.querySelector('input[name="login"]');
   const emailInput = form.querySelector('input[name="email"]');
   const passwordInput = form.querySelector('input[name="password"]');
 
-  nameInput.addEventListener("input", () => clearError(nameInput));
+  loginInput.addEventListener("input", () => clearError(loginInput));
   emailInput.addEventListener("input", () => clearError(emailInput));
   passwordInput.addEventListener("input", () => clearError(passwordInput));
 
@@ -158,11 +171,11 @@ function initLoginForm() {
     e.preventDefault();
     clearAllErrors(form);
 
-    const okName = validateName(nameInput);
+    const okLogin = validateLogin(loginInput);
     const okEmail = validateEmail(emailInput);
     const okPassword = validatePassword(passwordInput);
 
-    if (!okName) return nameInput.focus();
+    if (!okLogin) return loginInput.focus();
     if (!okEmail) return emailInput.focus();
     if (!okPassword) return passwordInput.focus();
 
