@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="./styles/components.css" />
     <link rel="stylesheet" href="./styles/pages/index.css" />
     <title>VESTA — магазин одежды</title>
+    <link
+      rel="preload"
+      as="image"
+      href="./assets/images/main_slider/hero-bg1.webp"
+      fetchpriority="high"
+    />
   </head>
   <body>
     <header class="header">
@@ -85,6 +91,7 @@
           <div class="search-bar">
             <input
               type="search"
+              id="site-search"
               class="search-bar__input"
               aria-label="Поиск товаров"
               placeholder="Искать одежду, обувь, аксессуары..."
@@ -103,12 +110,14 @@
         <div class="hero__slider">
           <!-- Слайд 1 -->
           <div class="hero__slide">
-            <div
+            <img
               class="hero__bg"
-              style="
-                background-image: url(./assets/images/main_slider/hero-bg1.jpg);
-              "
-            ></div>
+              src="./assets/images/main_slider/hero-bg1.webp"
+              alt=""
+              width="1920"
+              height="1080"
+              fetchpriority="high"
+            />
             <div class="container hero__container">
               <h1 class="hero__title hero__title--left">
                 Стиль для <br />
@@ -119,12 +128,14 @@
 
           <!-- Слайд 2 -->
           <div class="hero__slide">
-            <div
+            <img
               class="hero__bg"
-              style="
-                background-image: url(./assets/images/main_slider/hero-bg2.jpg);
-              "
-            ></div>
+              src="./assets/images/main_slider/hero-bg2.webp"
+              alt=""
+              width="1920"
+              height="1080"
+              loading="lazy"
+            />
             <div class="container hero__container">
               <h1 class="hero__title hero__title--center">
                 Комфорт без <br />
@@ -135,12 +146,14 @@
 
           <!-- Слайд 3 -->
           <div class="hero__slide">
-            <div
+            <img
               class="hero__bg"
-              style="
-                background-image: url(./assets/images/main_slider/hero-bg3.jpg);
-              "
-            ></div>
+              src="./assets/images/main_slider/hero-bg3.webp"
+              alt=""
+              width="1920"
+              height="1080"
+              loading="lazy"
+            />
             <div class="container hero__container">
               <h1 class="hero__title hero__title--right">
                 Твой <br />
@@ -205,7 +218,7 @@
             <li class="categories__list-item">
               <a href="#">
                 <img
-                  src="./assets/images/categories/women.jpg"
+                  src="./assets/images/categories/women.webp"
                   alt="Женщинам"
                 />
                 <h4>Женщинам</h4>
@@ -213,13 +226,13 @@
             </li>
             <li class="categories__list-item">
               <a href="#">
-                <img src="./assets/images/categories/men.jpg" alt="Мужчинам" />
+                <img src="./assets/images/categories/men.webp" alt="Мужчинам" />
                 <h4>Мужчинам</h4>
               </a>
             </li>
             <li class="categories__list-item">
               <a href="#">
-                <img src="./assets/images/categories/sale.jpg" alt="Скидки" />
+                <img src="./assets/images/categories/sale.webp" alt="Скидки" />
                 <h4>Скидки</h4>
               </a>
             </li>
@@ -260,6 +273,8 @@
                 alt="товар"
                 class="product-card__image"
                 loading="lazy"
+                width="282"
+                height="280"
               />
             </div>
             <div class="product-card__top">
@@ -293,6 +308,7 @@
                 name="email"
                 class="form-input quick-form__input"
                 placeholder="example@mail.com"
+                autocomplete="email"
               />
               <button
                 type="submit"
@@ -394,8 +410,8 @@
               Пользовательское соглашение
             </a>
             <a href="#" class="footer-bottom__links small-text">
-              Политика по работе с персональными данными</a
-            >
+              Политика по работе с персональными данными
+            </a>
             <a href="#" class="footer-bottom__links small-text">
               Служба поддержки
             </a>
@@ -408,6 +424,6 @@
     </footer>
 
     <script src="./scripts/common.js"></script>
-    <script src="./scripts/index.js"></script>
+    <script type="module" src="./scripts/index.js"></script>
   </body>
 </html>

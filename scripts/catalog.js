@@ -8,65 +8,42 @@ const filterConfig = [
 
 let filtersData = {};
 
-/* проверка режима */
-function isMobile() {
-  return window.matchMedia("(max-width: 730px)").matches;
-}
+const panel = document.querySelector(".filters-panel");
+const grid = document.querySelector(".catalog-grid");
+const overlay = document.querySelector(".filters-overlay");
+const toggle = document.querySelector(".filters__toggle");
 
-/* панель фильтров */
 function buildFilterPanel() {
-  const panel = document.querySelector(".filters-panel");
-  if (!panel) return;
-  panel.innerHTML = "";
-
   const categoryTpl = document.getElementById("filter-category-template");
   const optionTpl = document.getElementById("filter-option-template");
 
+  if (!panel || !categoryTpl || !optionTpl) return;
+
+  panel.innerHTML = "";
+
   filterConfig.forEach(({ key, title, type }) => {
     const options = filtersData[key];
-    if (!options || !options.length) return;
+    if (!Array.isArray(options) || !options.length) return;
 
-    const clone = categoryTpl.content.cloneNode(true);
-    clone.querySelector(".filter-category__name").textContent = title;
+    const category = categoryTpl.content.cloneNode(true);
+    const optionsBox = category.querySelector(".filter-options");
 
-    const optionsBox = clone.querySelector(".filter-options");
+    category.querySelector(".filter-category__name").textContent = title;
 
-    options.forEach((opt) => {
-      const optClone = optionTpl.content.cloneNode(true);
-      const input = optClone.querySelector("input");
-      const span = optClone.querySelector("span");
+    options.forEach(({ value, label }) => {
+      const option = optionTpl.content.cloneNode(true);
+      const input = option.querySelector("input");
 
       input.type = type;
       input.name = key;
-      input.value = opt.value;
-      span.textContent = opt.label;
+      input.value = value;
+      input.checked = type === "radio" && value === "all";
+      option.querySelector("span").textContent = label;
 
-      if (type === "radio" && opt.value === "all") input.checked = true;
-
-      optionsBox.appendChild(optClone);
+      optionsBox.appendChild(option);
     });
 
-    /* сворачивание/разворачивание */
-    const header = clone.querySelector(".filter-category__header");
-    header.addEventListener("click", () => {
-      const category = header.parentElement;
-
-      if (!isMobile()) {
-        const wasOpen = category.classList.contains("is-open");
-        panel
-          .querySelectorAll(".filter-category.is-open")
-          .forEach((el) => el.classList.remove("is-open"));
-        if (!wasOpen) category.classList.add("is-open");
-        return;
-      }
-
-      panel
-        .querySelectorAll(".filter-options.is-open")
-        .forEach((el) => el.classList.remove("is-open"));
-      optionsBox.classList.add("is-open");
-    });
-
-    panel.appendChild(clone);
+    panel.appendChild(category);
   });
 
   const done = document.createElement("button");
@@ -85,228 +62,153 @@ function getFilterState() {
     material: [],
   };
 
-  /* radio */
-  const genderChecked = document.querySelector(
-    '.filters-panel input[name="gender"]:checked',
-  );
-  if (genderChecked) state.gender = genderChecked.value;
-
-  /* checkbox */
-  ["category", "color", "brand", "material"].forEach((key) => {
-    document
-      .querySelectorAll(`.filters-panel input[name="${key}"]:checked`)
-      .forEach((input) => state[key].push(input.value));
+  panel.querySelectorAll("input:checked").forEach((input) => {
+    if (input.type === "radio") state[input.name] = input.value;
+    else state[input.name].push(input.value);
   });
 
   return state;
 }
 
-function matches(card, state) {
-  const dataEl = card.dataset;
-
-  const cardCategories = dataEl.category ? dataEl.category.split(",") : [];
-  const cardColors = dataEl.color ? dataEl.color.split(",") : [];
-  const cardMaterials = dataEl.material ? dataEl.material.split(",") : [];
-  const cardGender = dataEl.gender ? dataEl.gender.split(",") : [];
-  const cardBrand = dataEl.brand || "";
-
-  /* категория */
-  if (state.category.length) {
-    if (!state.category.some((v) => cardCategories.includes(v))) return false;
-  }
-
-  /* цвет */
-  if (state.color.length) {
-    if (!state.color.some((v) => cardColors.includes(v))) return false;
-  }
-
-  /* материал */
-  if (state.material.length) {
-    if (!state.material.some((v) => cardMaterials.includes(v))) return false;
-  }
-
-  /* бренд */
-  if (state.brand.length) {
-    if (!state.brand.includes(cardBrand)) return false;
-  }
-
-  /* пол */
-  if (state.gender && state.gender !== "all") {
-    if (!cardGender.includes(state.gender)) return false;
-  }
-
-  return true;
-}
-
-/* применение фильтров */
 function applyFilters() {
-  const grid = document.querySelector(".catalog-grid");
-  if (!grid) return;
+  if (!grid || !panel) return;
 
   const state = getFilterState();
-  const cards = grid.querySelectorAll(".product-card");
+  const empty = document.querySelector(".catalog-empty");
+  let visible = 0;
 
-  const emptyEl = document.querySelector(".catalog-empty");
+  grid.querySelectorAll(".product-card").forEach((card) => {
+    const data = card.dataset;
+    const list = (value) => (value ? value.split(",") : []);
 
-  let visibleCount = 0;
+    const matches = [
+      !state.category.length ||
+        state.category.some((v) => list(data.category).includes(v)),
+      !state.color.length ||
+        state.color.some((v) => list(data.color).includes(v)),
+      !state.material.length ||
+        state.material.some((v) => list(data.material).includes(v)),
+      !state.brand.length || state.brand.includes(data.brand || ""),
+      state.gender === "all" || list(data.gender).includes(state.gender),
+    ].every(Boolean);
 
-  cards.forEach((card) => {
-    const ok = matches(card, state);
-    card.hidden = !ok;
-    if (ok) visibleCount++;
+    card.hidden = !matches;
+    if (matches) visible++;
   });
 
-  if (emptyEl) emptyEl.hidden = visibleCount > 0;
+  if (empty) empty.hidden = visible > 0;
 }
 
-function updateFilterOptionStyles() {
-  const panel = document.querySelector(".filters-panel");
-  if (!panel) return;
-
+function updateFilterStyles() {
   panel.querySelectorAll(".filter-category").forEach((category) => {
-    const hasChecked = category.querySelector("input:checked") !== null;
-    category.classList.toggle("has-active", hasChecked);
+    const active = [...category.querySelectorAll("input:checked")].some(
+      (input) => input.value !== "all",
+    );
+
+    category.classList.toggle("has-active", active);
   });
 }
 
-/* сброс */
+function closeFilterOptions() {
+  panel
+    .querySelectorAll(".filter-category.is-open, .filter-options.is-open")
+    .forEach((element) => element.classList.remove("is-open"));
+}
+
 function resetFilters() {
-  document
-    .querySelectorAll('.filters-panel input[type="checkbox"]')
-    .forEach((i) => (i.checked = false));
+  panel.querySelectorAll("input").forEach((input) => {
+    input.checked = input.type === "radio" && input.value === "all";
+  });
 
-  document
-    .querySelectorAll('.filters-panel input[type="radio"]')
-    .forEach((i) => (i.checked = false));
-
-  const genderAll = document.querySelector(
-    '.filters-panel input[name="gender"][value="all"]',
-  );
-  if (genderAll) genderAll.checked = true;
-
-  updateFilterOptionStyles();
+  closeFilterOptions();
+  updateFilterStyles();
   applyFilters();
 }
 
-function bindFilterEvents() {
-  const panel = document.querySelector(".filters-panel");
+function toggleDrawer(forceOpen) {
   if (!panel) return;
 
-  panel.addEventListener("change", (e) => {
-    if (e.target.matches("input")) {
-      updateFilterOptionStyles();
-      applyFilters();
-    }
-  });
+  const isOpen = forceOpen ?? !panel.classList.contains("is-open");
 
-  const clearBtn = document.querySelector(".filters__btn-clear");
-  if (clearBtn) {
-    clearBtn.addEventListener("click", () => {
-      resetFilters();
-    });
-  }
+  panel.classList.toggle("is-open", isOpen);
+  if (toggle) toggle.setAttribute("aria-expanded", String(isOpen));
 
-  panel.addEventListener("click", (e) => {
-    if (e.target.closest(".filters-panel__done")) {
-      closeFiltersPanel();
-      return;
-    }
-    if (e.target.closest(".filter-options__close")) {
-      panel
-        .querySelectorAll(".filter-options.is-open")
-        .forEach((el) => el.classList.remove("is-open"));
-    }
-  });
+  document.body.style.overflow = isOpen ? "hidden" : "";
 
-  document.addEventListener("click", (e) => {
-    if (isMobile()) return;
-    if (!e.target.closest(".filter-category")) {
-      panel
-        .querySelectorAll(".filter-category.is-open")
-        .forEach((el) => el.classList.remove("is-open"));
-    }
-  });
-}
+  if (!overlay) return;
 
-function openFiltersPanel() {
-  const panel = document.querySelector(".filters-panel");
-  const toggle = document.querySelector(".filters__toggle");
-  const overlay = document.querySelector(".filters-overlay");
-  if (!panel || !toggle) return;
-
-  panel.classList.add("is-open");
-  toggle.setAttribute("aria-expanded", "true");
-  document.body.style.overflow = "hidden";
-
-  if (overlay) {
+  if (isOpen) {
     overlay.hidden = false;
     requestAnimationFrame(() => overlay.classList.add("is-open"));
-  }
-}
-
-function closeFiltersPanel() {
-  const panel = document.querySelector(".filters-panel");
-  const toggle = document.querySelector(".filters__toggle");
-  const overlay = document.querySelector(".filters-overlay");
-  if (!panel || !toggle) return;
-
-  panel
-    .querySelectorAll(".filter-options.is-open")
-    .forEach((el) => el.classList.remove("is-open"));
-
-  panel.classList.remove("is-open");
-  toggle.setAttribute("aria-expanded", "false");
-  document.body.style.overflow = "";
-
-  if (overlay) {
+  } else {
     overlay.classList.remove("is-open");
     setTimeout(() => {
-      overlay.hidden = true;
+      if (!overlay.classList.contains("is-open")) overlay.hidden = true;
     }, 300);
   }
 }
 
-function initFiltersDrawer() {
-  const toggle = document.querySelector(".filters__toggle");
-  const panel = document.querySelector(".filters-panel");
-  const overlay = document.querySelector(".filters-overlay");
-  if (!toggle || !panel) return;
+function initCatalogFilters() {
+  if (!panel) return;
 
-  toggle.addEventListener("click", () => {
-    panel.classList.contains("is-open")
-      ? closeFiltersPanel()
-      : openFiltersPanel();
+  buildFilterPanel();
+  updateFilterStyles();
+  applyFilters();
+
+  panel.addEventListener("change", (event) => {
+    if (!event.target.matches("input")) return;
+    updateFilterStyles();
+    applyFilters();
   });
 
-  if (overlay) {
-    overlay.addEventListener("click", closeFiltersPanel);
-  }
+  panel.addEventListener("click", (event) => {
+    if (event.target.closest(".filters-panel__done")) {
+      toggleDrawer(false);
+    } else if (event.target.closest(".filter-options__close")) {
+      event.preventDefault();
+      event.stopPropagation();
+      closeFilterOptions();
+    } else if (event.target.closest(".filter-category__header")) {
+      const category = event.target.closest(".filter-category");
+      const options = category.querySelector(".filter-options");
+      const wasOpen = category.classList.contains("is-open");
+
+      closeFilterOptions();
+
+      if (!wasOpen) {
+        category.classList.add("is-open");
+        options.classList.add("is-open");
+      }
+    }
+  });
+
+  document
+    .querySelector(".filters__btn-clear")
+    ?.addEventListener("click", resetFilters);
+
+  toggle?.addEventListener("click", () => toggleDrawer());
+  overlay?.addEventListener("click", () => toggleDrawer(false));
+
+  document.addEventListener("click", (event) => {
+    if (!event.target.closest(".filter-category")) closeFilterOptions();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeFilterOptions();
+      toggleDrawer(false);
+    }
+  });
 }
 
-async function loadFiltersJson(url = "../data/cards.json") {
-  const res = await fetch(url);
-  if (!res.ok) throw new Error("Не удалось загрузить cards.json");
-  return res.json();
-}
+document.addEventListener("products:rendered", (event) => {
+  const filters = event.detail?.filters;
 
-async function initCatalogFilters() {
-  try {
-    const data = await loadFiltersJson();
-    filtersData = data.filters;
-
-    buildFilterPanel();
-    bindFilterEvents();
-    initFiltersDrawer();
-    updateFilterOptionStyles();
-    applyFilters();
-  } catch (error) {
-    console.error("Ошибка инициализации фильтров:", error);
+  if (!filters) {
+    console.error("Не удалось получить данные фильтров");
+    return;
   }
-}
 
-const waitCards = setInterval(() => {
-  if (document.querySelector(".catalog-grid .product-card")) {
-    clearInterval(waitCards);
-    initCatalogFilters();
-  }
+  filtersData = filters;
+  initCatalogFilters();
 });

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
@@ -23,52 +23,59 @@
 
     <main class="main">
       <div class="container">
-        <form class="form-auth" action="" aria-labelledby="auth-log__title">
+        <form class="form-auth" aria-labelledby="auth-log__title" novalidate>
           <h3 class="form-auth__title" id="auth-log__title">Вход</h3>
-          <div class="form-auth__header">
-            <label for="auth-login" class="form-label">Логин</label>
-            <span class="form-error" data-error-for="login"></span>
-          </div>
-          <input
-            type="text"
-            class="form-input"
-            name="login"
-            id="auth-login"
-            placeholder="Введите ваш логин"
-          />
-
-          <div class="form-auth__header">
-            <label for="auth-email" class="form-label">Email</label>
-            <span class="form-error" data-error-for="email"></span>
-          </div>
-          <input
-            type="email"
-            class="form-input"
-            name="email"
-            id="auth-email"
-            placeholder="example@mail.com"
-          />
-
-          <div class="form-auth__header">
-            <label for="auth-password" class="form-label">Пароль</label>
-            <span class="form-error" data-error-for="password"></span>
-          </div>
-          <div
-            class="auth-password__container form-input form-input--has_margin"
-          >
+          <label class="field" for="auth-login">
+            <span class="field__label form-label">Логин</span>
             <input
-              type="password"
-              class="auth-password__input"
-              name="password"
-              id="auth-password"
-              placeholder="Введите ваш пароль"
+              type="text"
+              class="form-input"
+              name="login"
+              id="auth-login"
+              placeholder="Введите ваш логин"
+              required
+              minlength="2"
             />
-            <img
-              src="../assets/images/icons/eye_hidden-icon.svg"
-              alt="hidden eye"
-              class="auth-password__icon"
+            <small class="field__error"
+              >Укажите логин (минимум 2 символа)</small
+            >
+          </label>
+          <label class="field" for="auth-email">
+            <span class="field__label form-label">Email</span>
+            <input
+              type="email"
+              class="form-input"
+              name="email"
+              id="auth-email"
+              placeholder="example@mail.com"
+              required
+              autocomplete="email"
             />
-          </div>
+            <small class="field__error">Введите корректный email</small>
+          </label>
+
+          <label class="field" for="auth-password">
+            <span class="field__label form-label">Пароль</span>
+            <span class="auth-password__container form-input">
+              <input
+                type="password"
+                class="auth-password__input"
+                name="password"
+                id="auth-password"
+                placeholder="Введите ваш пароль"
+                required
+                minlength="8"
+              />
+              <img
+                src="../assets/images/icons/eye_hidden-icon.svg"
+                alt="hidden eye"
+                class="auth-password__icon"
+                width="22"
+                height="22"
+              />
+            </span>
+            <small class="field__error">Пароль — не менее 8 символов</small>
+          </label>
 
           <button type="submit" class="button button--theme_dark">Войти</button>
 

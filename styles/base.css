@@ -1,3 +1,4 @@
+/* Шрифты */
 @font-face {
   font-family: "Montserrat";
   src:
@@ -19,16 +20,17 @@
   font-display: swap;
 }
 
+/* Глобальные переменные */
 :root {
   font-size: 100%;
 
-  /* отступы и зазоры */
-  --space-xs: 0.25rem; /*  4px */
-  --space-sm: 0.5rem; /*  8px */
-  --space-md: 1rem; /* 16px */
-  --space-lg: 1.5rem; /* 24px */
-  --space-xl: 2rem; /* 32px */
-  --space-2xl: 3rem; /* 48px */
+  /* Отступы */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
 
   /* Цвета */
   --color-text: #0a0a0a;
@@ -36,78 +38,79 @@
   --color-secondary: #0a0a0a;
   --color-primary: #fffaf4;
 
-  /* Размер контейнера */
-  --container-max: 75rem;
+  /* Контейнер */
+  --container-max: 77.55rem;
   --container-pad: 1.25rem;
 }
 
+/* Основной контейнер */
 .container {
   max-width: var(--container-max);
-  padding: 0 var(--container-pad);
   margin: 0 auto;
+  padding: 0 var(--container-pad);
 }
 
+/* Основные стили страницы */
 body {
   background: var(--color-primary);
-  font-size: 1rem;
   color: var(--color-text);
   font-family: "Roboto", sans-serif;
+  font-size: 1rem;
 }
 
-h1 {
-  font-family: "Montserrat";
-  font-size: clamp(1.75rem, 1.2rem + 2.5vw, 3rem);
-  line-height: 1.5;
+/* Заголовки */
+h1,
+h2,
+h3 {
+  font-family: "Montserrat", sans-serif;
   font-weight: 700;
-  text-transform: uppercase;
+  line-height: 1.5;
+}
+h1 {
   color: var(--color-primary);
+  font-size: clamp(1.75rem, 1.2rem + 2.5vw, 3rem);
+  text-transform: uppercase;
 }
 h2 {
-  font-family: "Montserrat";
   font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2rem);
-  line-height: 1.5;
-  font-weight: 700;
   text-align: center;
 }
 h3 {
-  font-family: "Montserrat";
   font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.5rem);
-  line-height: 1.5;
-  font-weight: 700;
 }
 h4 {
-  font-family: "Roboto";
+  font-family: "Roboto", sans-serif;
   font-size: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
-  line-height: 1.15;
   font-weight: 600;
+  line-height: 1.15;
   text-transform: uppercase;
 }
 
+/* Основной текст и элементы форм */
 p,
 a,
 input,
 button {
-  font-family: "Roboto";
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
-  line-height: 1.5;
   font-weight: 500;
+  line-height: 1.5;
 }
-
 button,
 input[type="checkbox"] {
   background-color: inherit;
   cursor: pointer;
 }
-
 input {
   background-color: inherit;
 }
 
+/* Вспомогательный текст */
 .small-text,
 .form-label {
-  font-family: "Roboto";
+  font-family: "Roboto", sans-serif;
   font-size: 0.75rem;
-  line-height: 1.167;
   font-weight: 400;
+  line-height: 1.167;
   text-transform: uppercase;
 }

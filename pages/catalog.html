@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
@@ -14,8 +14,8 @@
     <header class="header">
       <div class="header-top">
         <div class="container header-container">
-          <a href="../index.html"
-            ><img src="../assets/images/icons/brand-logo.svg" alt="logo" />
+          <a href="../index.html">
+            <img src="../assets/images/icons/brand-logo.svg" alt="logo" />
           </a>
           <div class="header-burger header-burger--top">
             <span></span><span></span><span></span>
@@ -65,6 +65,7 @@
           </div>
         </div>
       </div>
+
       <div class="header-bottom">
         <div class="container header-container">
           <nav class="nav-links" aria-label="Категории товаров">
@@ -87,6 +88,7 @@
           <div class="search-bar">
             <input
               type="search"
+              id="site-search"
               class="search-bar__input"
               aria-label="Поиск товаров"
               placeholder="Искать одежду, обувь, аксессуары..."
@@ -116,8 +118,11 @@
             <button class="filters__btn-clear small-text">Сбросить все</button>
           </div>
 
-          <div class="filters-panel"><!-- фильтры карточек --></div>
+          <div class="filters-panel">
+            <!-- фильтры карточек -->
+          </div>
           <div class="filters-overlay" hidden></div>
+
           <!-- Шаблон фильтра -->
           <template id="filter-category-template">
             <div class="filter-category">
@@ -142,10 +147,10 @@
                     ✕
                   </button>
                 </div>
-                <!-- .filter-option из второго шаблона -->
               </div>
             </div>
           </template>
+
           <!-- Шаблон опции фильтра -->
           <template id="filter-option-template">
             <label class="filter-option">
@@ -162,6 +167,7 @@
         <div class="catalog-grid">
           <!-- карточки товаров -->
         </div>
+
         <!-- шаблон карточки товара -->
         <template id="product-card-template">
           <article class="product-card">
@@ -179,6 +185,8 @@
                   alt="товар"
                   class="product-card__image"
                   loading="lazy"
+                  width="282"
+                  height="280"
                 />
               </div>
               <div class="product-card__top">
@@ -236,6 +244,7 @@
               <a href="#">vesta@ya.ru</a>
             </div>
           </div>
+
           <div class="footer-top__nav">
             <ul class="footer-nav">
               <li class="footer-nav__item">
@@ -260,6 +269,7 @@
           </div>
         </div>
       </div>
+
       <div class="footer-bottom">
         <div class="container footer-container-bottom">
           <div class="footer-bottom__legal">
@@ -267,8 +277,8 @@
               Пользовательское соглашение
             </a>
             <a href="#" class="footer-bottom__links small-text">
-              Политика по работе с персональными данными</a
-            >
+              Политика по работе с персональными данными
+            </a>
             <a href="#" class="footer-bottom__links small-text">
               Служба поддержки
             </a>
@@ -280,8 +290,8 @@
       </div>
     </footer>
 
-    <script src="../scripts/products.js"></script>
-    <script src="../scripts/catalog.js"></script>
     <script src="../scripts/common.js"></script>
+    <script src="../scripts/catalog.js"></script>
+    <script type="module" src="../scripts/products.js"></script>
   </body>
 </html>

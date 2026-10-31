@@ -1,97 +1,81 @@
-/* бесконечная карусель */
-const slider = document.querySelector(".hero__slider");
-const dots = document.querySelectorAll(".hero__dot");
-const slides = document.querySelectorAll(".hero__slide").length;
+import { renderProductCards } from "./product-card.js";
 
-let currentIndex = 0;
+// Слайдер главной страницы
+function initHeroCarousel() {
+  const hero = document.querySelector(".hero");
+  const slider = document.querySelector(".hero__slider");
+  if (!hero || !slider) return;
 
-const firstSlideClone = slider.firstElementChild.cloneNode(true);
-slider.appendChild(firstSlideClone);
+  const dots = [...document.querySelectorAll(".hero__dot")];
+  const total = slider.querySelectorAll(".hero__slide").length;
+  if (total < 2) return;
 
-setInterval(() => {
-  currentIndex++;
-  slider.style.transition = "0.8s";
-  slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+  let current = 0;
+  let timer;
 
-  const dotIndex = currentIndex % slides;
-  dots.forEach((dot, index) => {
-    dot.classList.toggle("hero__dot--active", index === dotIndex);
+  const goTo = (index) => {
+    current = index;
+    slider.style.transition = `transform ${index === 0 ? "1.2s" : "0.8s"} ease-in-out`;
+    slider.style.transform = `translateX(-${current * 100}%)`;
+
+    dots.forEach((dot, i) =>
+      dot.classList.toggle("hero__dot--active", i === current),
+    );
+  };
+
+  const stop = () => clearInterval(timer);
+
+  const start = () => {
+    stop();
+
+    if (
+      document.hidden ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    )
+      return;
+
+    timer = setInterval(() => {
+      if (!hero.matches(":hover")) {
+        goTo((current + 1) % total);
+      }
+    }, 3000);
+  };
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener("click", () => {
+      goTo(i);
+      start();
+    });
   });
 
-  if (currentIndex === slides) {
-    setTimeout(() => {
-      slider.style.transition = "none";
-      slider.style.transform = "translateX(0)";
-      currentIndex = 0;
-      dots.forEach((dot, index) => {
-        dot.classList.toggle("hero__dot--active", index === 0);
-      });
-    }, 800);
-  }
-}, 3000);
+  document.addEventListener("visibilitychange", () =>
+    document.hidden ? stop() : start(),
+  );
 
-/* карточки товаров по секциям */
-function formatPrice(value) {
-  return value.toLocaleString("ru-RU") + " ₽";
+  start();
 }
 
-function createProductCard(product) {
-  const template = document.getElementById("product-card-template");
-  const card = template.content.cloneNode(true);
-
-  const cardEl = card.querySelector(".product-card");
-  const imageEl = card.querySelector(".product-card__image");
-  const priceEl = card.querySelector(".product-card__price");
-  const oldPriceEl = card.querySelector(".product-card__old-price");
-  const discountEl = card.querySelector(".product-card__discount-badge");
-  const brandEl = card.querySelector(".product-card__brand");
-  const nameEl = card.querySelector(".product-card__name");
-
-  imageEl.src = product.image;
-  imageEl.alt = product.name;
-  priceEl.textContent = formatPrice(product.price);
-  brandEl.textContent = product.brand;
-  nameEl.textContent = product.name;
-
-  if (product.isSale && product.oldPrice && product.discount) {
-    oldPriceEl.textContent = formatPrice(product.oldPrice);
-    discountEl.textContent = `-${product.discount}%`;
-    cardEl.classList.add("product-card--sale");
-    priceEl.classList.add("product-card__price--sale");
-  } else {
-    oldPriceEl.remove();
-    discountEl.remove();
-  }
-
-  return card;
-}
-
-function renderProductCard(products, container) {
-  if (!container) return;
-
-  container.innerHTML = "";
-  const fragment = document.createDocumentFragment();
-  products.forEach((product) => {
-    fragment.appendChild(createProductCard(product));
-  });
-  container.appendChild(fragment);
-}
-
+// Популярные товары и акции
 async function initFeaturedCards() {
-  try {
-    const res = await fetch("./data/featured.json");
-    if (!res.ok) throw new Error("Не удалось загрузить featured.json");
-    const data = await res.json();
+  const lists = document.querySelectorAll(".product-list[data-source]");
+  if (!lists.length) return;
 
-    document.querySelectorAll(".product-list[data-source]").forEach((list) => {
-      const source = list.dataset.source;
-      if (Array.isArray(data[source])) {
-        renderProductCard(data[source], list);
+  try {
+    const response = await fetch("./data/featured.json");
+    if (!response.ok) throw new Error(`Ошибка загрузки: ${response.status}`);
+
+    const data = await response.json();
+
+    lists.forEach((list) => {
+      const products = data[list.dataset.source];
+      if (Array.isArray(products)) {
+        renderProductCards(products, list);
       }
     });
-  } catch (err) {
-    console.error("Ошибка загрузки витрины:", err);
+  } catch (error) {
+    console.error("Ошибка загрузки товаров:", error);
   }
 }
 
+initHeroCarousel();
 initFeaturedCards();

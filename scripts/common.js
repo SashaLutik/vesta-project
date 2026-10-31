@@ -1,106 +1,88 @@
-const input = document.querySelector(".search-bar__input");
+const $ = (selector) => document.querySelector(selector);
 
-window.addEventListener("resize", function () {
-  input.setAttribute(
-    "placeholder",
-    this.innerWidth >= 1140
-      ? "Искать одежду, обувь, аксессуары..."
-      : "Искать одежду, обувь...",
-  );
-});
+const input = $(".search-bar__input");
+const topBurger = $(".header-burger--top");
+const topMenu = $(".header-top__actions");
+const topClose = $(".header-top__close");
+const bottomBurger = $(".header-burger--bottom");
+const bottomMenu = $(".nav-links__list");
 
-/* верхнее меню */
-const topBurger = document.querySelector(".header-burger--top");
-const topActions = document.querySelector(".header-top__actions");
-const topCloseBtn = document.querySelector(".header-top__close");
-const toggleTopMenu = () => {
-  const willOpen = !topActions.classList.contains("is-open");
-  topActions.classList.toggle("is-open", willOpen);
-  topBurger.classList.toggle("is-active", willOpen);
-  if (willOpen) {
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "";
+const setMenu = (menu, burger, isOpen, lockScroll = false) => {
+  if (!menu) return;
+
+  menu.classList.toggle("is-open", isOpen);
+  burger?.classList.toggle("is-active", isOpen);
+
+  if (lockScroll) {
+    document.body.style.overflow = isOpen ? "hidden" : "";
   }
 };
-if (topBurger && topActions) {
-  topBurger.addEventListener("click", (e) => {
-    e.stopPropagation();
-    toggleTopMenu();
-  });
-}
-if (topCloseBtn && topActions) {
-  topCloseBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    toggleTopMenu();
-  });
-}
 
-const topNavLinks = document.querySelectorAll(".main-nav__list a");
-topNavLinks.forEach((link) => {
-  link.addEventListener("click", () => {
-    if (topActions.classList.contains("is-open")) {
-      toggleTopMenu();
-    }
-  });
-});
-
-/* меню категорий */
-const bottomBurger = document.querySelector(".header-burger--bottom");
-const navLinksList = document.querySelector(".nav-links__list");
-const toggleBottomMenu = () => {
-  const willOpen = !navLinksList.classList.contains("is-open");
-  navLinksList.classList.toggle("is-open", willOpen);
-  bottomBurger.classList.toggle("is-active", willOpen);
+const toggleMenu = (menu, burger, lockScroll = false) => {
+  if (menu) {
+    setMenu(menu, burger, !menu.classList.contains("is-open"), lockScroll);
+  }
 };
 
-if (bottomBurger && navLinksList) {
-  bottomBurger.addEventListener("click", (e) => {
-    e.stopPropagation();
-    toggleBottomMenu();
-  });
+// Поиск
+function updatePlaceholder() {
+  if (input) {
+    input.placeholder =
+      window.innerWidth >= 1140
+        ? "Искать одежду, обувь, аксессуары..."
+        : "Искать одежду, обувь...";
+  }
 }
-const bottomNavLinks = document.querySelectorAll(".nav-links__list a");
-bottomNavLinks.forEach((link) => {
+
+updatePlaceholder();
+window.addEventListener("resize", updatePlaceholder);
+
+// Верхнее меню
+topBurger?.addEventListener("click", (e) => {
+  e.stopPropagation();
+  toggleMenu(topMenu, topBurger, true);
+});
+
+topClose?.addEventListener("click", () => {
+  setMenu(topMenu, topBurger, false, true);
+});
+
+document.querySelectorAll(".main-nav__list a").forEach((link) => {
   link.addEventListener("click", () => {
-    if (navLinksList.classList.contains("is-open")) {
-      toggleBottomMenu();
-    }
+    setMenu(topMenu, topBurger, false, true);
   });
 });
 
+// Меню категорий
+bottomBurger?.addEventListener("click", (e) => {
+  e.stopPropagation();
+  toggleMenu(bottomMenu, bottomBurger);
+});
+
+bottomMenu?.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => {
+    setMenu(bottomMenu, bottomBurger, false);
+  });
+});
+
+// Закрытие меню при клике вне них
 document.addEventListener("click", (e) => {
-  const isClickInsideTop = topActions && topActions.contains(e.target);
-  const isTopBurgerClick = topBurger && topBurger.contains(e.target);
-  const isClickInsideBottom = navLinksList && navLinksList.contains(e.target);
-  const isBottomBurgerClick = bottomBurger && bottomBurger.contains(e.target);
-  if (
-    !isClickInsideTop &&
-    !isTopBurgerClick &&
-    !isClickInsideBottom &&
-    !isBottomBurgerClick
-  ) {
-    if (topActions.classList.contains("is-open")) {
-      toggleTopMenu();
-    }
-    if (navLinksList.classList.contains("is-open")) {
-      toggleBottomMenu();
-    }
+  if (!topMenu?.contains(e.target) && !topBurger?.contains(e.target)) {
+    setMenu(topMenu, topBurger, false, true);
+  }
+
+  if (!bottomMenu?.contains(e.target) && !bottomBurger?.contains(e.target)) {
+    setMenu(bottomMenu, bottomBurger, false);
   }
 });
 
+// Адаптация меню при изменении ширины окна
 window.addEventListener("resize", () => {
   if (window.innerWidth > 520) {
-    if (topActions.classList.contains("is-open")) {
-      toggleTopMenu();
-    }
+    setMenu(topMenu, topBurger, false, true);
   }
+
   if (window.innerWidth > 750) {
-    if (navLinksList.classList.contains("is-open")) {
-      toggleBottomMenu();
-    }
-  }
-  if (window.innerWidth > 520) {
-    document.body.style.overflow = "";
+    setMenu(bottomMenu, bottomBurger, false);
   }
 });

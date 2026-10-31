@@ -4,49 +4,66 @@ body {
 }
 
 body {
-  background: var(--color-secondary) url("../../assets/images/auth-bg.jpg")
-    center / cover no-repeat fixed;
   display: flex;
   flex-direction: column;
   min-height: 100%;
-}
-.main {
-  flex: 1 0 auto;
-  padding: 4.75rem 0 var(--space-xl) 0;
+  background: var(--color-secondary) url("../../assets/images/auth-bg.webp")
+    center / cover no-repeat fixed;
 }
 
-/* форма */
+/* Основной контент */
+.main {
+  flex: 1 0 auto;
+  padding: 4.75rem 0 var(--space-xl);
+}
+
+/* Форма авторизации */
 .form-auth {
   display: flex;
   flex-direction: column;
-  max-width: 26.25rem;
+  max-width: 32.25rem;
+  margin: var(--space-2xl) auto var(--space-lg);
   padding: var(--space-xl) var(--space-2xl);
   background: var(--color-primary);
   border-radius: 8px;
-  margin: var(--space-2xl) auto var(--space-lg);
 }
 .form-auth__title {
   margin-bottom: var(--space-xl);
   text-align: center;
 }
-.form-auth__header {
+.field {
   display: flex;
-  align-items: center;
-  gap: var(--space-sm);
+  flex-direction: column;
+  margin-bottom: var(--space-md);
+}
+.field__label {
   margin-bottom: var(--space-sm);
 }
+.field__error {
+  display: none;
+  margin-top: var(--space-sm);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.167;
+}
+.field:has(:user-invalid) .form-input {
+  border: 1px solid var(--color-accent);
+  outline-color: var(--color-accent);
+}
+.field:has(:user-invalid) .field__error {
+  display: block;
+}
+
+/* Поле пароля */
 .auth-password__container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   gap: var(--space-sm);
 }
 .auth-password__container:focus-within {
   outline: auto;
-}
-.form-input--has_margin {
-  margin-bottom: var(--space-xl);
 }
 .auth-password__input {
   flex-grow: 1;
@@ -55,18 +72,11 @@ body {
   outline: none;
 }
 .auth-password__icon {
-  cursor: pointer;
   flex-shrink: 0;
+  cursor: pointer;
 }
-.form-error {
-  color: var(--color-accent);
-  font-size: 0.75rem;
-  line-height: 1.167;
-  font-weight: 400;
-}
-.form-input--invalid {
-  border-color: var(--color-accent);
-}
+
+/* Нижняя часть формы */
 .form-auth__footer {
   display: flex;
   align-items: center;
@@ -79,7 +89,7 @@ body {
   text-decoration: underline;
 }
 
-/* адаптив под устройства */
+/* Адаптивность */
 @media (max-width: 670px) {
   .main {
     padding-bottom: var(--space-md);

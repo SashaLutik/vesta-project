@@ -2,7 +2,7 @@
   "products": [
     {
       "id": 1,
-      "image": "../assets/images/card_images/card-image_1.jpg",
+      "image": "../assets/images/card_images/card-image_1.webp",
       "brand": "Abda",
       "name": "Пальто из мериносовой шерсти",
       "price": 30990,
@@ -16,7 +16,7 @@
     },
     {
       "id": 2,
-      "image": "../assets/images/card_images/card-image_2.jpg",
+      "image": "../assets/images/card_images/card-image_2.webp",
       "brand": "Abda",
       "name": "Брюки свободной посадки",
       "price": 12800,
@@ -30,7 +30,7 @@
     },
     {
       "id": 3,
-      "image": "../assets/images/card_images/card-image_3.jpg",
+      "image": "../assets/images/card_images/card-image_3.webp",
       "brand": "arligent",
       "name": "Джинсы широкие",
       "price": 14390,
@@ -44,7 +44,7 @@
     },
     {
       "id": 4,
-      "image": "../assets/images/card_images/card-image_4.jpg",
+      "image": "../assets/images/card_images/card-image_4.webp",
       "brand": "Lime",
       "name": "Платье",
       "price": 2999,
@@ -58,7 +58,7 @@
     },
     {
       "id": 5,
-      "image": "../assets/images/card_images/card-image_5.jpg",
+      "image": "../assets/images/card_images/card-image_5.webp",
       "brand": "frht",
       "name": "Бомбер",
       "price": 19800,
@@ -72,7 +72,7 @@
     },
     {
       "id": 6,
-      "image": "../assets/images/card_images/card-image_6.jpg",
+      "image": "../assets/images/card_images/card-image_6.webp",
       "brand": "Abricot",
       "name": "Лоферы на каблуке",
       "price": 6453,
@@ -86,7 +86,7 @@
     },
     {
       "id": 7,
-      "image": "../assets/images/card_images/card-image_7.jpg",
+      "image": "../assets/images/card_images/card-image_7.webp",
       "brand": "Belle you",
       "name": "Рубашка домашняя",
       "price": 8399,
@@ -100,7 +100,7 @@
     },
     {
       "id": 8,
-      "image": "../assets/images/card_images/card-image_8.jpg",
+      "image": "../assets/images/card_images/card-image_8.webp",
       "brand": "Emka",
       "name": "Платье пиджак",
       "price": 25990,
@@ -114,7 +114,7 @@
     },
     {
       "id": 9,
-      "image": "../assets/images/card_images/card-image_9.jpg",
+      "image": "../assets/images/card_images/card-image_9.webp",
       "brand": "Belle you",
       "name": "Брюки домашние",
       "price": 6990,
@@ -128,7 +128,7 @@
     },
     {
       "id": 10,
-      "image": "../assets/images/card_images/card-image_10.jpg",
+      "image": "../assets/images/card_images/card-image_10.webp",
       "brand": "frht",
       "name": "Рубашка",
       "price": 13732,
@@ -142,7 +142,7 @@
     },
     {
       "id": 11,
-      "image": "../assets/images/card_images/card-image_11.jpg",
+      "image": "../assets/images/card_images/card-image_11.webp",
       "brand": "Emka",
       "name": "Джинсы",
       "price": 12900,
@@ -156,7 +156,7 @@
     },
     {
       "id": 12,
-      "image": "../assets/images/card_images/card-image_12.jpg",
+      "image": "../assets/images/card_images/card-image_12.webp",
       "brand": "Lime",
       "name": "Свитер",
       "price": 2990,
@@ -170,7 +170,7 @@
     },
     {
       "id": 13,
-      "image": "../assets/images/card_images/card-image_13.jpg",
+      "image": "../assets/images/card_images/card-image_13.webp",
       "brand": "Abricot",
       "name": "Кеды летние",
       "price": 2446,
@@ -184,7 +184,7 @@
     },
     {
       "id": 14,
-      "image": "../assets/images/card_images/card-image_14.jpg",
+      "image": "../assets/images/card_images/card-image_14.webp",
       "brand": "Lime",
       "name": "Пиджак",
       "price": 13990,
@@ -198,7 +198,7 @@
     },
     {
       "id": 15,
-      "image": "../assets/images/card_images/card-image_15.jpg",
+      "image": "../assets/images/card_images/card-image_15.webp",
       "brand": "arligent",
       "name": "Брюки свободные",
       "price": 1590,
@@ -212,7 +212,7 @@
     },
     {
       "id": 16,
-      "image": "../assets/images/card_images/card-image_16.jpg",
+      "image": "../assets/images/card_images/card-image_16.webp",
       "brand": "Emka",
       "name": "Короткий пуховик на молнии",
       "price": 37790,
