@@ -362,6 +362,105 @@ input[type="radio"]:not(:checked):active {
   color: var(--color-accent);
 }
 
+
+/* Модальное окно формы товара */
+html.modal-open,
+body.modal-open {
+  overflow: hidden;
+}
+
+.product-modal {
+  display: none;
+}
+
+.product-modal--active {
+  display: block;
+}
+.product-modal__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: block;
+  background: #0a0a0a66;
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.3s ease;
+}
+.product-modal__content {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: var(--color-primary);
+  position: fixed;
+  z-index: 190;
+  top: 32px;
+  bottom: 32px;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-secondary) var(--color-primary);
+}
+.product-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.product-modal__close {
+  color: var(--color-secondary);
+  font-size: 1.5rem;
+}
+.product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.product-form input[type="number"]::-webkit-inner-spin-button,
+.product-form input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.product-form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 16px;
+}
+.product-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.product-form__options{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px 16px;
+  margin-bottom: 16px;
+}
+.product-form__options label{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.product-form__field select {
+  background: var(--color-primary);
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.product-form__checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.product-form__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
 /* Адаптивность */
 @media (max-width: 1140px) {
   .header-top__actions,

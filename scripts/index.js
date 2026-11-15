@@ -84,7 +84,7 @@ async function initFeaturedCards() {
           oldPrice: product.oldPrice === null ? null : Number(product.oldPrice),
         }));
 
-        renderProductCards(normalizedProducts, list);
+        renderProductCards(normalizedProducts, list, "./pages/product.html");
       }
     });
   } catch (error) {

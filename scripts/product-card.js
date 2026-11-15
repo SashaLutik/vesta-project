@@ -1,6 +1,6 @@
 export const formatPrice = (value) => value.toLocaleString("ru-RU") + " ₽";
 
-export function createProductCard(product) {
+export function createProductCard(product, productPagePath = "./product.html") {
   const template = document.getElementById("product-card-template");
   if (!template) throw new Error("Не найден шаблон карточки товара");
 
@@ -8,6 +8,9 @@ export function createProductCard(product) {
   const $ = (selector) => card.querySelector(selector);
 
   const cardEl = $(".product-card");
+  const productLink = $("a");
+  productLink.href = `${productPagePath}?id=${product.id}`;
+
   const image = $(".product-card__image");
   const price = $(".product-card__price");
   const oldPrice = $(".product-card__old-price");
@@ -42,7 +45,11 @@ export function createProductCard(product) {
   return card;
 }
 
-export function renderProductCards(products, containerSelector) {
+export function renderProductCards(
+  products,
+  containerSelector,
+  productPagePath = "./product.html",
+) {
   const container =
     typeof containerSelector === "string"
       ? document.querySelector(containerSelector)
@@ -53,7 +60,7 @@ export function renderProductCards(products, containerSelector) {
   const fragment = document.createDocumentFragment();
 
   products.forEach((product) => {
-    fragment.appendChild(createProductCard(product));
+    fragment.appendChild(createProductCard(product, productPagePath));
   });
 
   container.replaceChildren(fragment);

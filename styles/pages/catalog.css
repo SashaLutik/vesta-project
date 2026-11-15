@@ -11,10 +11,18 @@
   justify-items: center;
   padding: var(--space-2xl) 0 4rem;
 }
-
+.add-card {
+  margin-top: 4rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.add-card span {
+  font-size: 18px;
+}
 /* Фильтры */
 .filters {
-  padding-top: 4rem;
+  padding-top: var(--space-md);
 }
 .filters__header {
   display: flex;
@@ -98,6 +106,8 @@
   padding: 4rem 0;
   opacity: 0.5;
 }
+
+
 
 /* Адаптивность */
 @media (max-width: 1090px) {
