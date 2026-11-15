@@ -4,20 +4,35 @@ async function initProductsPage() {
   const grid = document.querySelector(".catalog-grid");
 
   try {
-    const response = await fetch("../data/cards.json");
-    if (!response.ok) throw new Error(`Ошибка загрузки: ${response.status}`);
+    const [productsResponse, filtersResponse] = await Promise.all([
+      fetch("http://localhost:5000/api/products"),
+      fetch("http://localhost:5000/api/filters"),
+    ]);
 
-    const data = await response.json();
-
-    if (!Array.isArray(data.products) || !data.filters) {
-      throw new Error("Некорректная структура cards.json");
+    if (!productsResponse.ok || !filtersResponse.ok) {
+      throw new Error("Не удалось получить данные с сервера");
     }
 
-    renderProductCards(data.products, grid);
+    const [productsData, filters] = await Promise.all([
+      productsResponse.json(),
+      filtersResponse.json(),
+    ]);
+
+    if (!Array.isArray(productsData) || !filters) {
+      throw new Error("Некорректная структура данных API");
+    }
+
+    const products = productsData.map((product) => ({
+      ...product,
+      price: Number(product.price),
+      oldPrice: product.oldPrice === null ? null : Number(product.oldPrice),
+    }));
+
+    renderProductCards(products, grid);
 
     document.dispatchEvent(
       new CustomEvent("products:rendered", {
-        detail: { filters: data.filters },
+        detail: { filters },
       }),
     );
   } catch (error) {

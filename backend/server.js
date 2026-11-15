@@ -488,6 +488,103 @@ app.get("/api/categories", async (req, res) => {
     }
 });
 
+/* Получение данных для фильтров */
+app.get("/api/filters", async (req, res) => {
+    try {
+        const [
+            categoriesResult,
+            colorsResult,
+            brandsResult,
+            materialsResult
+        ] = await Promise.all([
+            pool.query(`
+                SELECT
+                    slug AS value,
+                    name AS label
+                FROM categories
+                ORDER BY id;
+            `),
+
+            pool.query(`
+                SELECT
+                    item.value,
+                    MIN(p.id) AS first_id
+                FROM products p
+                CROSS JOIN LATERAL unnest(p.color) AS item(value)
+                GROUP BY item.value
+                ORDER BY first_id;
+            `),
+
+            pool.query(`
+                SELECT DISTINCT
+                    LOWER(brand) AS value,
+                    brand AS label
+                FROM products
+                ORDER BY value;
+            `),
+
+            pool.query(`
+                SELECT DISTINCT item.value
+                FROM products p
+                CROSS JOIN LATERAL unnest(p.material) AS item(value);
+            `)
+        ]);
+
+        const materialsOrder = [
+            "вискоза",
+            "меринос",
+            "хлопок",
+            "полиэстер",
+            "шерсть",
+            "нейлон",
+            "велюр",
+            "кожа",
+            "эластан"
+        ];
+
+        const materials = materialsResult.rows
+            .map(item => item.value)
+            .sort((a, b) => materialsOrder.indexOf(a) - materialsOrder.indexOf(b))
+            .map(value => ({
+                value,
+                label: value.charAt(0).toUpperCase() + value.slice(1)
+            }));
+
+        const brands = brandsResult.rows.map(item => ({
+            value: item.value,
+            label: item.label
+                .toLowerCase()
+                .replace(/\b\p{L}/gu, letter => letter.toUpperCase())
+        }));
+
+        res.json({
+            category: categoriesResult.rows,
+
+            gender: [
+                { value: "all", label: "Все", type: "radio" },
+                { value: "женское", label: "Женское", type: "radio" },
+                { value: "мужское", label: "Мужское", type: "radio" }
+            ],
+
+            color: colorsResult.rows.map(item => ({
+                value: item.value,
+                label: item.value.charAt(0).toUpperCase() + item.value.slice(1)
+            })),
+
+            brand: brands,
+
+            material: materials
+        });
+
+    } catch (error) {
+        console.error("Ошибка получения фильтров:", error.message);
+
+        res.status(500).json({
+            message: "Не удалось получить данные фильтров"
+        });
+    }
+});
+
 /* Запуск */
 const PORT = process.env.PORT || 5000;
 
