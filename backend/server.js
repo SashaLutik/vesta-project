@@ -585,6 +585,56 @@ app.get("/api/filters", async (req, res) => {
     }
 });
 
+/* Получение популярных товаров и товаров со скидками */
+app.get("/api/featured", async (req, res) => {
+    try {
+        const [popularResult, saleResult] = await Promise.all([
+          pool.query(`
+                SELECT
+                    id,
+                    image,
+                    brand,
+                    name,
+                    price,
+                    old_price AS "oldPrice",
+                    discount,
+                    is_sale AS "isSale"
+                FROM products
+                WHERE is_popular = TRUE
+                ORDER BY id;
+            `),
+
+          pool.query(`
+                SELECT
+                    id,
+                    image,
+                    brand,
+                    name,
+                    price,
+                    old_price AS "oldPrice",
+                    discount,
+                    is_sale AS "isSale"
+                FROM products
+                WHERE is_sale = TRUE
+                ORDER BY id
+                LIMIT 4;
+            `),
+        ]);
+
+        res.json({
+            popular: popularResult.rows,
+            sale: saleResult.rows
+        });
+
+    } catch (error) {
+        console.error("Ошибка получения подборок товаров:", error.message);
+
+        res.status(500).json({
+            message: "Не удалось получить подборки товаров"
+        });
+    }
+});
+
 /* Запуск */
 const PORT = process.env.PORT || 5000;
 

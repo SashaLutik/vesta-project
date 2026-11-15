@@ -1,6 +1,6 @@
 import { renderProductCards } from "./product-card.js";
 
-// Слайдер главной страницы
+/* Слайдер главной страницы */
 function initHeroCarousel() {
   const hero = document.querySelector(".hero");
   const slider = document.querySelector(".hero__slider");
@@ -55,21 +55,36 @@ function initHeroCarousel() {
   start();
 }
 
-// Популярные товары и акции
+/* Популярные товары и акции */
 async function initFeaturedCards() {
   const lists = document.querySelectorAll(".product-list[data-source]");
   if (!lists.length) return;
 
   try {
-    const response = await fetch("./data/featured.json");
-    if (!response.ok) throw new Error(`Ошибка загрузки: ${response.status}`);
+    const response = await fetch("http://localhost:5000/api/featured");
+
+    if (!response.ok) {
+      throw new Error(`Ошибка загрузки: ${response.status}`);
+    }
 
     const data = await response.json();
 
+    if (!data.popular || !data.sale) {
+      throw new Error("Некорректная структура данных API");
+    }
+
     lists.forEach((list) => {
       const products = data[list.dataset.source];
+
       if (Array.isArray(products)) {
-        renderProductCards(products, list);
+        const normalizedProducts = products.map((product) => ({
+          ...product,
+          image: product.image.replace("../assets/", "./assets/"),
+          price: Number(product.price),
+          oldPrice: product.oldPrice === null ? null : Number(product.oldPrice),
+        }));
+
+        renderProductCards(normalizedProducts, list);
       }
     });
   } catch (error) {
